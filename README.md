@@ -56,3 +56,10 @@ example, `"a\n    b\n  c\n"` raises because `c` is indented two columns while
 the only open levels are 0 and 4. If you want `c` to be a sibling of `b`, indent
 it four columns; if you want it to be a child of `a`, indent it two columns and
 make sure nothing deeper is currently open.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
